@@ -11,7 +11,7 @@
 
 ## rds_log_downloader.py
 
-######   Downlaods RDS logs; general, slow query or error logs.
+######   Downloads RDS logs; general, slow query or error logs.
 
 ## proxysql-scripts DIR
 
