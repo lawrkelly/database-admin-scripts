@@ -17,7 +17,8 @@ This repository contains Database engineering scripts for various tasks
 
 ###### ProxySQL managements scripts
 	
-	######get_users.sql
+	get_users.sql
+	-------------
 
 	This aquires the source/target prod database users and their 
 	passwords.  Then sets up these users by populating the 
@@ -25,15 +26,18 @@ This repository contains Database engineering scripts for various tasks
 	in the proxySQL DB that makes connections on port 6033
 	In addtion it will update any user password changes.
 	
-	######kill_sql_sessions.sh
+	kill_sql_sessions.sh
+	--------------------
 
 	Kills sql user sessions if there are too many connected
 
-	######monitor_tuner.sh
+	monitor_tuner.sh
+	----------------
 
 	Gives detailes performance info for the ProxySQL DB
 
-	######backup_proxysql.sh
+	backup_proxysql.sh
+	------------------
 
 	Backsup the SQLite3 ProxySQL DB by way of a dump. This
 	produces a SQL test files which is also useful for any
