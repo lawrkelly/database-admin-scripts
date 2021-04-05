@@ -1,4 +1,4 @@
-#Repo of Database Engineering scripts for various tasks
+# Repo of Database Engineering scripts for various tasks
 
 ## run_pt-osc_utf8mb4.sh
 
@@ -20,8 +20,8 @@
 	get_users.sql
 	-------------
 
-	This aquires the source/target prod database users and their 
-	passwords.  Then sets up these users by populating the 
+	Aquires the source/target prod database users and 
+	passwords.  Sets up these users by populating the 
 	proxySQL SQLite3.  This is required for authentication 
 	in the proxySQL DB that makes connections on port 6033
 	In addtion it will update any user password changes.
@@ -29,17 +29,18 @@
 	kill_sql_sessions.sh
 	--------------------
 
-	Kills sql user sessions if there are too many connected
+	Kills ALL sql user sessions.  Useful if there are too many 
+	connections.
 
 	monitor_tuner.sh
 	----------------
 
-	Gives detailes performance info for the ProxySQL DB
+	Gives detailed performance info for the ProxySQL DB.
 
 	backup_proxysql.sh
 	------------------
 
-	Backsup the SQLite3 ProxySQL DB by way of a dump. This
-	produces a SQL test files which is also useful for any
-	SQL that needs to be run ad hoc.
+	Backs up the SQLite3 ProxySQL DB using dump. This
+	produces a SQL text file, useful for any
+	SQL that needs to be run ad hoc as well.
 	
