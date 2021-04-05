@@ -1,20 +1,41 @@
 This repository contains Database engineering scripts for various tasks
 
-- alter tables to utf8mb4 format to accept universal coded character sets
-	
-	The DB infra is using an older latin1 character set.  This causes
-	data to be rejected.  This fixes the issue by altering tables 
-	to the new utf8 character set.  This is done online with no impact
-	to the tables access.  It uses Percona online schema change. 
+## run_pt-osc_utf8mb4.sh
 
-- downlaod RDS logs; general, slow query or error logs.
-
-- proxySQL managements scripts
+###### Alters specified table to utf8mb4 format to accept universal coded character sets
 	
-	It aquires the source/target prod database users and their 
+	The DB infra is using an older latin1 character set that causes
+	data to be rejected.  The fix alters the table to the new utf8 (universal) 
+	character set allowing global characters.  This is done online with no impact
+	to tables access.  It uses Percona online schema change. 
+
+## rds_log_downloader.py
+
+######   Downlaods RDS logs; general, slow query or error logs.
+
+## proxysql-scripts DIR
+
+###### ProxySQL managements scripts
+	
+	######get_users.sql
+
+	This aquires the source/target prod database users and their 
 	passwords.  Then sets up these users by populating the 
 	proxySQL SQLite3.  This is required for authentication 
 	in the proxySQL DB that makes connections on port 6033
 	In addtion it will update any user password changes.
+	
+	######kill_sql_sessions.sh
 
+	Kills sql user sessions if there are too many connected
+
+	######monitor_tuner.sh
+
+	Gives detailes performance info for the ProxySQL DB
+
+	######backup_proxysql.sh
+
+	Backsup the SQLite3 ProxySQL DB by way of a dump. This
+	produces a SQL test files which is also useful for any
+	SQL that needs to be run ad hoc.
 	
