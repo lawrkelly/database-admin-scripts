@@ -2,18 +2,19 @@ This repository contains Database engineering scripts for various tasks
 
 - alter tables to utf8mb4 format to accept universal coded character sets
 	
-	The database in our infra is set to an older latin1 character type
+	The DB infra is using an older latin1 character set.  This causes
+	data to be rejected.  This fixes the issue by altering tables 
+	to the new utf8 character set.  This is done online with no impact
+	to the tables access.  It uses Percona online schema change. 
 
-- downlaod RDS logs; general, slow query or error logs
+- downlaod RDS logs; general, slow query or error logs.
 
 - proxySQL managements scripts
 	
-	Set up users by populating the proxySQL SQLite3 DB with the
-	production DB accounts.
-	It aquires the source/target prod database users for the proxysql.
-	This is required to autheticate users and theup to date passwords.
-	If there is a password change in the target prod this will update
-	the password also.
-
+	It aquires the source/target prod database users and their 
+	passwords.  Then sets up these users by populating the 
+	proxySQL SQLite3.  This is required for authentication 
+	in the proxySQL DB that makes connections on port 6033
+	In addtion it will update any user password changes.
 
 	
