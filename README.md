@@ -1,4 +1,4 @@
-This repository contains Database engineering scripts for various tasks
+#Repo of Database Engineering scripts for various tasks
 
 ## run_pt-osc_utf8mb4.sh
 
