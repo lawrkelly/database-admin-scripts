@@ -1,4 +1,4 @@
-# Repo of Database Engineering scripts for various tasks
+# Repo for Database Engineering tasks
 
 ## run_pt-osc_utf8mb4.sh
 
@@ -17,7 +17,7 @@
 
 ###### ProxySQL managements scripts
 	
-	get_users.sql
+-       [get_users.sql]
 	-------------
 
 	Aquires the source/target prod database users and 
