@@ -3,7 +3,7 @@ Craft a web request to the AWS rest API and hit an endpoint that actually works 
 
 Based on https://gist.github.com/andrewmackett/5f73bdd29aeed4728ecaace53abbe49b
 
-Usage :- python3 rds_log_downloader.py  --region <region> --db <db_name> --logfile <log_file_to_download>  --output <output_file_path>
+Usage :- python3 rds_log_downloader.py --s3_bucket <bucket> --region <region> --db <db_name> --logfile <log_file_to_download>  --output <output_file_path>
 
 Note:-
 
@@ -15,6 +15,7 @@ import sys, os, base64, datetime, hashlib, hmac, urllib
 import requests
 import time
 import argparse
+# import tinys3
 
 
 def get_credentials(profile_name=None):
@@ -134,6 +135,7 @@ def get_log_file_via_rest(profile_name, region, filename, db_instance_identifier
 parser = argparse.ArgumentParser(description='RDS Log Downloader')
 parser.add_argument("-p", "--profile", help="name of the profile to be used")
 parser.add_argument("-t", "--retries", help="number of retries in case of request failure", type=int, default=3)
+parser.add_argument("-b", "--s3_bucket", required=True, help="s3 bucket target")
 parser.add_argument("-r", "--region", required=True, help="region of the db instance")
 parser.add_argument("-d", "--db", required=True, help="db instance")
 parser.add_argument("-l", "--logfile", required=True, help="log file to download")
@@ -144,16 +146,18 @@ args = parser.parse_args()
 
 retries = args.retries
 profile_name = args.profile
+s3_bucket = args.s3_bucket
 region = args.region
 log_file = args.logfile
 db_instance = args.db
 output_file = args.output
 sleep_time = args.sleep
 
+
 while True:
     try:
         get_log_file_via_rest(profile_name, region, log_file, db_instance, output_file)
-        break
+        #break
     except Exception as e:
         # The below is for handling retry for session expiry in case of usage of role based credentials. The retries basically waits and gets the next set of role credentials and retries downloading
         if retries <= 0:
@@ -163,3 +167,9 @@ while True:
             retries -= 1
             time.sleep(sleep_time)
 
+    # conn = tinys3.Connection('access_key','secret_key',tls=True)
+    
+    s3 = boto3.client('s3')
+    with open(output_file, 'rb') as data:
+        s3.upload_fileobj(data, s3_bucket, output_file)
+    break
