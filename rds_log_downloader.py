@@ -170,6 +170,7 @@ while True:
     # conn = tinys3.Connection('access_key','secret_key',tls=True)
     
     s3 = boto3.client('s3')
+    print(output_file)
     with open(output_file, 'rb') as data:
         s3.upload_fileobj(data, s3_bucket, output_file)
     break
