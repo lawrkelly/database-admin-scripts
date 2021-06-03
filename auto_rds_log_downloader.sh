@@ -4,7 +4,7 @@
 
 # get the slow query file logs list
 
-aws rds describe-db-log-files --region us-east-1 --db-instance-identifier givelify-aurora-vpc | grep slow > list.txt
+aws rds describe-db-log-files --region us-east-1 --db-instance-identifier leadedata-aurora-vpc | grep slow > list.txt
 
 # remove the logiles as we append the results
 
@@ -40,6 +40,6 @@ while IFS=$'\t' read -r file1 file2 rest; do
 
 # run the loader python script to upload the files
 
-python3 rds_log_downloader.py --s3_bucket database-admin-repo --region us-east-1 --db givelify-aurora-vpc --logfile $file1 --output $file2
+python3 rds_log_downloader.py --s3_bucket database-admin-repo --region us-east-1 --db leadedata-aurora-vpc --logfile $file1 --output $file2
 
 done

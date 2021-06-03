@@ -1,4 +1,4 @@
-#!/bin/bash
+run_pt-osc_utf8mb4.sh#!/bin/bash
 
 # runs pt-osc by taking some prompts that detail the host, DB, table and mode
 # tested and runs on unicorn@ip-192-168-118-158
@@ -15,9 +15,9 @@ echo "dry run: y/n:"
 read dry
 
 if [ $answ = 1 ]; then
-    host='givelify-stage2-proxy3.cowdp1swpwvs.us-west-2.rds.amazonaws.com'
+    host='leadedata-stage2-proxy3.cowdp1swpwvs.us-west-2.rds.amazonaws.com'
 else
-    host='givelify-stage2-vpc-aurora-cluster.cluster-cowdp1swpwvs.us-west-2.rds.amazonaws.com'
+    host='leadedata-stage2-vpc-aurora-cluster.cluster-cowdp1swpwvs.us-west-2.rds.amazonaws.com'
 fi
 
 if [ $dry = y ]; then
